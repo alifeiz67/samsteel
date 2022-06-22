@@ -1,0 +1,83 @@
+{% extends 'company/main.html' %}
+{% load static %}
+{% block content %}
+<br>
+<div class="row">
+	<div class="col-med-7">
+		<div class="card card-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" name="submit">
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<h5>{{ user.f_name }} {{ user.l_name}}</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="">بروزرسانی</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="">تولیدات</a>
+
+		</div>
+	</div>
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>اطلاعات  کارمند</h5>
+			<hr>
+			<p style="padding: 10px">شغل: {{user.job}}</p>
+			<p style="padding: 10px">تلفن: {{user.mobile}}</p>
+		</div>
+	</div>
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>مجموع تولید</h5>
+			<hr>
+			{% for pro in process %}
+				{% if pro.user == user %}
+
+			<h1 style="text-align: center;padding: 10px">{{total_process}}</h1>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">عملکرد</a>
+			<table class="table table-sm">
+				<tr>
+					<th>شماره</th>
+					<th>نام فرآیند</th>
+					<th>دستگاه</th>
+					<th>محصول</th>
+					<th>تاریخ تولید</th>
+					<th>وضعیت</th>
+					<th>تغداد</th>
+				</tr>
+				{% for pro in process %}
+				<tr>
+					{% if pro.user == user %}
+					<td>{{ pro.id }}</td>
+					<td>{{ pro.name }}</td>
+					<td>{{ pro.machine }}</td>
+					<td>{{ pro.Product }}</td>
+					<td>{{ pro.date }}</td>
+					<td>{{ pro.status }}</td>
+					<td>{{ pro.number }}</td>
+					{% endif %}
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

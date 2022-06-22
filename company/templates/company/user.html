@@ -1,0 +1,57 @@
+{% extends 'company/main.html' %}
+{% load static %}
+{% block content %}
+<br>
+<div class="row">
+	<div class="col-med-7">
+		<div class="card card-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" name="submit">
+			</form>
+		</div>
+		
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">عملکرد</a>
+			<table class="table table-sm">
+				<tr>
+					<th>نام </th>
+					<th>نام خانوادگی </th>
+					<th>شغل</th>
+					<th>تاریخ ورود</th>
+					<th>تحصیلات</th>
+					<th>جنسیت</th>
+					<th>موبایل</th>
+					<th>دستمزد</th>
+					<th>حذف</th>
+					<th>ویرایش</th>
+					<th>نمایش</th>
+				</tr>
+				{% for u in user %}
+				<tr>
+					<td>{{ u.f_name }}</td>
+					<td>{{ u.l_name }}</td>
+					<td>{{ u.job }}</td>
+					<td>{{ u.date_enter }}</td>
+					<td>{{ u.education }}</td>
+					<td>{{ u.sex }}</td>
+					<td>{{ u.mobile }}</td>
+					<td>{{ u.salary }}</td>
+					<td><a class='btn btn-danger' href="{% url 'userenter' %}">حذف</a></td>
+					<td><a class='btn btn-info' href="{% url 'update_user' u.id %}">ویرایش</a></td>
+					<td><a class='btn btn-info' href="{% url 'user_views' u.id %}">نمایش</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

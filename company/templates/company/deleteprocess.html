@@ -1,0 +1,15 @@
+{% extends 'company/main.html' %}
+{% load static %}
+{% block content %}
+
+<p>Are you sure to delete this {{item}}</p>
+
+<form dir="rtl" action="{% url 'delete_process' item.id %}" method="POST">
+	
+	{% csrf_token %}
+	<a href="{% url 'home' %}">Cancel</a>
+
+	<input type="submit" name="Confirm">
+
+</form>
+{% endblock %}

@@ -1,0 +1,54 @@
+{%  extends 'company/main.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<div class="col-med-7">
+		<div class="card card-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" name="submit">
+			</form>
+		</div>
+		
+	</div>
+</div>
+
+<div class="col-md">
+	<h5></h5>
+	<hr>
+	<div class="card card-body">
+		<a class="btn btn-primary  btn-sm btn-block" href="">وضعیت تولید</a>
+		<table class="table table-sm"  dir="rtl">
+			<tr>
+				<th>شماره</th>
+				<th>فرآیند</th>
+				<th>دستگاه</th>
+				<th>کاربر</th>
+				<th>محصول</th>
+				<th>تاریخ</th>
+				<th>وضعیت</th>
+				<th>تعداد</th>
+				<th>پاک کردن</th>
+				<th>ویرایش</th>
+			</tr>
+			{% for proc in process %}
+			<tr>
+				<td>{{ proc.id }}</td>
+				<td>{{ proc.name }}</td>
+				<td>{{ proc.machine }}</td>
+				<td>{{ proc.user }}</td>
+				<td>{{ proc.Product }}</td>
+				<td>{{ proc.date }}</td>
+				<td>{{ proc.status }}</td>
+				<td>{{ proc.number }}</td>
+				<td><a class='btn btn-danger' href="{% url 'delete_process' proc.id %}">پاک کردن</a></td>
+				<td><a name="Update" class="btn btn-info" href="{% url 'update_process' proc.id %}  ">ویرایش</a></td>
+			{% endfor %}
+			</tr>
+	
+		</table>
+	</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{%  extends 'company/main.html' %}
+{% load static %}
+{% block content %}
+
+<a class='btn btn-info' href="{% url 'chart' %}">chart</a>
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">مجموع تولید شده</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title" href="chart.html">{{ total_process }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">تعداد  کارکنان</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{ total_user }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">تعداد دستگاه</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{ total_machine }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="total-orders">
+			  	<div class="card-header">
+			  		<h5 class="card-title">مجموع تولید شده</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title" href="">{{ total_process }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-delivered">
+			  	<div class="card-header">
+			  		<h5 class="card-title">تعداد  کارکنان</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{ total_user }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col">
+		<div class="col-md">
+			<div class="card text-center text-white  mb-3" id="orders-pending">
+			  	<div class="card-header">
+			  		<h5 class="card-title">تعداد دستگاه</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<h3 class="card-title">{{ total_machine }}</h3>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row">
+	<div class="col-md-7">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="">محصولات</a>
+			<table class="table table-sm" dir="rtl">
+				<tr>
+					<th align="center" nowrap>شماره محصول</th>
+					<th align="center" nowrap>نوع  محصول</th>
+					<th align="center" nowrap>مدل محصول</th>
+					<th align="center" nowrap>تعداد دسته</th>
+					<th align="center" nowrap>قیمت</th>
+				</tr>
+				{% for pro in product %}
+				<tr>
+					<td align="center" nowrap>{{ pro.id }}</td>
+					<td align="center" nowrap>{{ pro.category }}</td>
+					<td align="center" nowrap>{{ pro.model }}</td>
+					<td align="center" nowrap>{{ pro.max_in_box }}</td>
+					<td align="center" nowrap>{{ pro.pirce }}</td>
+				{% endfor %}
+				</tr>
+		
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-5">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="http://127.0.0.1:8000/userenter">کارکنان</a>
+			<table class="table table-sm"  dir="rtl">
+				<tr>
+					<th>نام</th>
+					<th>نام خانوادگی</th>
+					<th>شغل</th>
+				</tr>
+				{% for u in user %}
+				<tr>
+					<td>{{ u.f_name }}</td>
+					<td>{{ u.l_name }}</td>
+					<td>{{ u.job }}</td>
+				{% endfor %}
+				</tr>
+		
+			</table>
+		</div>
+	</div>
+</div>
+	<div class="col-md">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="http://127.0.0.1:8000/enterprocess">وضعیت تولید</a>
+			<table class="table table-sm" >
+				<tr>
+					<th>شماره</th>
+					<th>فرآیند</th>
+					<th>دستگاه</th>
+					<th>کاربر</th>
+					<th>محصول</th>
+					<th>تاریخ</th>
+					<th>وضعیت</th>
+					<th>تعداد</th>
+				</tr>
+				{% for proc in process %}
+				<tr>
+					<td align="center">{{ proc.id }}</td>
+					<td align="center">{{ proc.name }}</td>
+					<td align="center">{{ proc.machine }}</td>
+					<td align="center">{{ proc.user }}</td>
+					<td align="center">{{ proc.Product }}</td>
+					<td align="center">{{ proc.date }}</td>
+					<td align="center">{{ proc.status }}</td>
+					<td align="center">{{ proc.number }}</td>
+				{% endfor %}
+				</tr>
+		
+			</table>
+		</div>
+	</div>
+
+<br>
+
+	<div class="col-md">
+		<h5></h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="http://127.0.0.1:8000/machine_enter">دستگاه ها</a>
+			<table class="table table-sm"  dir="rtl">
+				<tr>
+					<th>شماره سریال</th>
+					<th>نام دستگاره</th>
+					<th>تاریخ بکارگیری</th>
+					<th>عملیات</th>
+				</tr>
+				{% for mac in machine %}
+				<tr>
+					<td>{{ mac.serial_num }}</td>
+					<td>{{ mac.name }}</td>
+					<td>{{ mac.date_enter }}</td>
+					<td>{{ mac.function }}</td>
+				{% endfor %}
+				</tr>
+		
+			</table>
+		</div>
+	</div>
+	
+	
+</div>
+
+{% endblock %}

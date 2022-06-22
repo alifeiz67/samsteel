@@ -1,0 +1,64 @@
+{%  extends 'company/main.html' %}
+
+{% block content %}
+<br>
+<div class="row">
+	<div class="col-med-7">
+		<div class="card card-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" name="submit">
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>نام دستگاه</th>
+					<th>تاریخ بکارگیری</th>
+					<th>عملکرد</th>
+					<th>توضیحات</th>
+					<th>شماره سریال</th>
+					<th>چند کاربره</th>
+					<th>حذف</th>
+					<th>ویرایش</th>
+					<th>نمایش</th>
+				</tr>
+				{% for mac in machine %}
+				<tr>
+					<td>{{ mac.name }}</td>
+					<td>{{ mac.date_enter }}</td>
+					<td>{{ mac.function }}</td>
+					<td>{{ mac.subject }}</td>
+					<td>{{ mac.serial_num }}</td>
+					<td>{{ mac.type_user }}</td>
+					<td><a class='btn btn-danger' href="">حذف</a></td>
+					<td><a class='btn btn-info' href="{% url 'update_machine' mac.id %}">ویرایش</a></td>
+					<td><a class='btn btn-info' href="{% url 'update_machine' mac.id %}">نمایش</a></td>
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

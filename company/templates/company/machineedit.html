@@ -1,0 +1,88 @@
+{%  extends 'company/main.html' %}
+
+{% block content %}
+<br>
+<div class="row">
+	<div class="col-med-7">
+		<div class="card card-body">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form}}
+				<input type="submit" name="submit">
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>دستگاه: {{ machine.name }} {{ machine.serial_num }}</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="">بروزرسانی</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" href="">حذف</a>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>مشخصات ماشین</h5>
+			<hr>
+			<p>نام دستگاه  : {{ machine.name }}</p>
+			<p>شماره سریال  : {{ machine.serial_num }}</p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>مجموع تولید کرده</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px"></h1>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>نام فرآیند</th>
+					<th>نام محصول</th>
+					<th>نام کاربر</th>
+					<th>وضعیت فرآیند</th>
+					<th>تعداد تولید شده</th>
+				</tr>
+				{% for pro in process %}
+				<tr>
+					{% if pro.machine == machine %}
+					<td>{{ pro.name }}</td>
+					<td>{{ pro.Product }}</td>
+					<td>{{ pro.user }}</td>
+					<td>{{ pro.status }}</td>
+					<td>{{ pro.number }}</td>
+					{% endif %}
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

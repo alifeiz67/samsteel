@@ -2,16 +2,39 @@
 {% load static %}
 {% block content %}
 <div class="row">
-	<div class="col-med-7">
-		<div class="card card-body">
+	<div class="col">
+		<div class="card card-body"  align="center">
 			<form action="" method="POST">
 				{% csrf_token %}
-				{{form}}
+				<div class="input-group mb-3">
+					<h6>نام فرایند : </h6>
+					{{ form.name }}
+					<h6>نام کاربر : </h6>
+					{{ form.personal }}
+					<h6>نام محصول : </h6>
+					{{ form.Product }}
+					<h6>نام دستگاه : </h6>
+					{{ form.machine }}
+					<h6>وضعیت : </h6>
+					{{ form.status }}
+					<h6>تعداد : </h6>
+					{{ form.number }}
+				</div>
 				<input type="submit" name="submit">
 			</form>
 		</div>
-		
 	</div>
+</div>
+<div class="row">
+	<div class="col">
+		<div class="card card-body" align="rtl">
+			<form method="get">
+				{{myfilter.form}}
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+
 </div>
 
 <div class="col-md">

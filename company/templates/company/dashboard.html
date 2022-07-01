@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<a class='btn btn-info' href="{% url 'chart' %}">chart</a>
+<br>
 <div class="row">
 	<div class="col">
 		<div class="col-md">
@@ -11,7 +11,7 @@
 			  		<h5 class="card-title">مجموع تولید شده</h5>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title" href="chart.html">{{ total_process }}</h3>
+			    	<h3 class="card-title" href="chart.html">{{ total_complete }}</h3>
 			  	</div>
 			</div>
 		</div>
@@ -21,10 +21,10 @@
 		<div class="col-md">
 			<div class="card text-center text-white  mb-3" id="orders-delivered">
 			  	<div class="card-header">
-			  		<h5 class="card-title">تعداد  کارکنان</h5>
+			  		<h5 class="card-title">مجموع در حال تولید</h5>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title">{{ total_user }}</h3>
+			    	<h3 class="card-title">{{ total_in_process }}</h3>
 			  	</div>
 			</div>
 		</div>
@@ -34,10 +34,10 @@
 		<div class="col-md">
 			<div class="card text-center text-white  mb-3" id="orders-pending">
 			  	<div class="card-header">
-			  		<h5 class="card-title">تعداد دستگاه</h5>
+			  		<h5 class="card-title">مجموع ضایعات</h5>
 			  	</div>
 			  	<div class="card-body">
-			    	<h3 class="card-title">{{ total_machine }}</h3>
+			    	<h3 class="card-title">{{ total_defective }}</h3>
 			  	</div>
 			</div>
 		</div>
@@ -125,7 +125,7 @@
 					<th>نام خانوادگی</th>
 					<th>شغل</th>
 				</tr>
-				{% for u in user %}
+				{% for u in personal %}
 				<tr>
 					<td>{{ u.f_name }}</td>
 					<td>{{ u.l_name }}</td>
@@ -158,7 +158,7 @@
 					<td align="center">{{ proc.id }}</td>
 					<td align="center">{{ proc.name }}</td>
 					<td align="center">{{ proc.machine }}</td>
-					<td align="center">{{ proc.user }}</td>
+					<td align="center">{{ proc.personal }}</td>
 					<td align="center">{{ proc.Product }}</td>
 					<td align="center">{{ proc.date }}</td>
 					<td align="center">{{ proc.status }}</td>

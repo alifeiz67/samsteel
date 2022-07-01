@@ -12,6 +12,7 @@ class Machine(models.Model):
 	subject = models.CharField(max_length=500, null= True)
 	serial_num = models.IntegerField(null= True)
 	type_user = models.CharField(max_length= 30, choices= CATEGORY, null= True)
+	error=  models.CharField(max_length=100, null= True)
 
 	def __str__(self):
 		return self.name
@@ -23,7 +24,7 @@ class Job(models.Model):
 	def __str__(self):
 		return (self.name)
 
-class User(models.Model):
+class Personal(models.Model):
 	SEX = (
 		('male', 'male'),
 		('female', 'female'),
@@ -44,11 +45,12 @@ class Product(models.Model):
 	CATEGORY = (
 		('قاشق', 'قاشق'),
 		('چنگال', 'چنگال'),
+		('چاقو', 'چاقو'),
 		)
-	model = models.CharField(max_length= 200, null= True)
-	category = models.CharField(max_length= 50, choices= CATEGORY, null= True)
-	max_in_box = models.IntegerField(null= True)
-	pirce = models.FloatField(null = True)
+	model = models.CharField(max_length=200, null=True)
+	category = models.CharField(max_length=50, choices=CATEGORY, null=True)
+	max_in_box = models.IntegerField(null=True)
+	pirce = models.FloatField(null=True)
 
 	def __str__(self):
 		return self.model
@@ -56,10 +58,11 @@ class Product(models.Model):
 class Nameprocess(models.Model):
 	name = models.CharField(max_length= 200, blank= True, null= True)
 	subject = models.CharField(max_length=500, null= True)
-	timeprocess = models.FloatField(null = True)
+	timeprocess = models.FloatField(null=True)
 
 	def __str__(self):
 		return self.name
+
 
 class Process(models.Model):
 	STATUS = (
@@ -67,14 +70,14 @@ class Process(models.Model):
 		('complete', 'کامل'),
 		('defective', 'معیوب'),
 		)
-	name = models.ForeignKey(Nameprocess, blank= True, null= True, on_delete= models.SET_NULL)
+	name = models.ForeignKey(Nameprocess, blank=True, null=True, on_delete=models.SET_NULL)
 #	name = models.CharField(max_length= 100, null= True)
-	user = models.ForeignKey(User, null= True, on_delete= models.SET_NULL)
-	Product = models.ForeignKey(Product, null= True, on_delete= models.SET_NULL)
-	machine = models.ForeignKey(Machine, null= True, on_delete= models.SET_NULL)
-	status = models.CharField(max_length= 50, choices= STATUS, null= True)
-	date = models.DateTimeField(auto_now_add= True)
-	number = models.IntegerField(null= True)
+	personal = models.ForeignKey(Personal, null=True, on_delete=models.SET_NULL)
+	Product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+	machine = models.ForeignKey(Machine, null=True, on_delete=models.SET_NULL)
+	status = models.CharField(max_length=50, choices=STATUS, null=True)
+	date = models.DateTimeField(auto_now_add=True)
+	number = models.IntegerField(null=True)
 
 	def __str__(self):
 		return self.name
